@@ -1,0 +1,29 @@
+public class TiendaApp {
+    public static void main(String[] args) {
+        Inventario inventario = new Inventario();
+
+        // Creación y registro de productos
+        inventario.agregarProducto(new ProductoAlimenticio("ALM-001", "Leche Deslactosada 1L", 4500.0, "2026-12-10"));
+        inventario.agregarProducto(new ProductoAlimenticio("ALM-002", "Arroz Diana 1kg", 3800.0, "2027-05-15"));
+        inventario.agregarProducto(new ProductoElectronico("ELE-001", "Multitoma Protectora", 25000.0, 110));
+
+        System.out.println("--- PRUEBA DE BÚSQUEDA EXITOSA ---");
+        try {
+            Producto p = inventario.buscarProducto("ALM-001");
+            System.out.println("Encontrado: " + p);
+        } catch (ProductoNoEncontradoException e) {
+            System.out.println(e.getMessage());
+        }
+
+        System.out.println("\n--- PRUEBA DE BÚSQUEDA FALLIDA (EXCEPCIÓN) ---");
+        try {
+            Producto p = inventario.buscarProducto("ELE-999");
+            System.out.println("Encontrado: " + p);
+        } catch (ProductoNoEncontradoException e) {
+            System.out.println("Aviso al usuario: " + e.getMessage());
+        }
+
+        System.out.println("\n--- MOSTRAR TODO EL INVENTARIO ---");
+        inventario.mostrarInventario();
+    }
+}
